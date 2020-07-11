@@ -23,5 +23,7 @@ Once an Image is instantiated, one can queue ray tracing of a given environment,
 * Hopefully, allow pre-computation steps and scene storage for radiosity, photon mapping, ambient occlusion, etc.
 
 ## Compiling and Running
-I haven't needed to compile yet since Visual Studio Code allows running and debugging directly from the main method.
-This will be investigated further soon.
+Provided in this project is a simple Makefile that can compile, run, and clean up after the Java program.
+The commands themselves can be run directly from a terminal or command line manually.
+If you are using a shell other than BASH, the clean command may not work.
+All the clean command does is remove all "*.class" files in the com folder (or its subfolders).
