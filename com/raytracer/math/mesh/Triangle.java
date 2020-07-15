@@ -3,42 +3,42 @@ package com.raytracer.math.mesh;
 import com.raytracer.math.ray.Ray;
 import com.raytracer.math.vector.Vector3;
 
-public class Triangle implements Mesh {
-	private Vector3 vertexA, vertexB, vertexC;
+public class Triangle {
+	private Vertex A, B, C;
 
-	public Triangle(Vector3 vertexA, Vector3 vertexB, Vector3 vertexC) {
-		this.vertexA = vertexA;
-		this.vertexB = vertexB;
-		this.vertexC = vertexC;
+	public Triangle(Vertex A, Vertex B, Vertex C) {
+		this.A = A;
+		this.B = B;
+		this.C = C;
 	}
 
-	public Vector3 getVertexA() {
-		return this.vertexA;
+	public Vertex getA() {
+		return this.A;
 	}
 
-	public void setVertexA(Vector3 vertexA) {
-		this.vertexA = vertexA;
+	public void setA(Vertex A) {
+		this.A = A;
 	}
 
-	public Vector3 getVertexB() {
-		return this.vertexB;
+	public Vertex getB() {
+		return this.B;
 	}
 
-	public void setVertexB(Vector3 vertexB) {
-		this.vertexB = vertexB;
+	public void setB(Vertex B) {
+		this.B = B;
 	}
 
-	public Vector3 getVertexC() {
-		return this.vertexC;
+	public Vertex getC() {
+		return this.C;
 	}
 
-	public void setVertexC(Vector3 vertexC) {
-		this.vertexC = vertexC;
+	public void setC(Vertex C) {
+		this.C = C;
 	}
 
 	public boolean intersects(Ray ray) { // Moller-Trumbore algorithm
-		Vector3 edgeAB = this.vertexB.substract(this.vertexA);
-		Vector3 edgeAC = this.vertexC.substract(this.vertexA);
+		Vector3 edgeAB = this.B.getPosition().substract(this.A.getPosition());
+		Vector3 edgeAC = this.C.getPosition().substract(this.A.getPosition());
 
 		float viewVolume = edgeAB.dot(ray.getDirection().cross(edgeAC));
 
@@ -47,7 +47,7 @@ public class Triangle implements Mesh {
 		}
 
 		float divisor = 1 / viewVolume;
-		Vector3 vertexAToOrigin = ray.getOrigin().substract(this.vertexA);
+		Vector3 vertexAToOrigin = ray.getOrigin().substract(this.A.getPosition());
 
 		float u = vertexAToOrigin.dot(ray.getDirection().cross(edgeAC)) * divisor;
 
@@ -70,5 +70,5 @@ public class Triangle implements Mesh {
 		}
 
 		return false;
-	}
+	} // will need method of perserving u and v parameters for vertex/triangle interpolation
 }

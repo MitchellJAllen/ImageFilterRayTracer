@@ -1,7 +1,5 @@
 package com.raytracer.math.mesh;
 
-import com.raytracer.math.ray.Ray;
-
-public interface Mesh {
-	public boolean intersects(Ray ray);
+public class Mesh {
+	// should contain collections of Vertex and Triangle instances
 }

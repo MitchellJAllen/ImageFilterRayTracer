@@ -1,6 +1,7 @@
 package com.raytracer.filter.raytrace.environment;
 
 import com.raytracer.math.mesh.Triangle;
+import com.raytracer.math.mesh.Vertex;
 import com.raytracer.math.ray.Ray;
 import com.raytracer.math.vector.Vector3;
 import com.raytracer.math.vector.Vector4;
@@ -10,9 +11,9 @@ public class TriangleEnvironment implements Environment {
 
 	public TriangleEnvironment() {
 		this.triangle = new Triangle(
-			new Vector3(0, 1, -2),
-			new Vector3(-1, -1, -2),
-			new Vector3(1, -1, -2)
+			new Vertex(new Vector3(0, 1, -2)),
+			new Vertex(new Vector3(-1, -1, -2)),
+			new Vertex(new Vector3(1, -1, -2))
 		);
 	}
 
