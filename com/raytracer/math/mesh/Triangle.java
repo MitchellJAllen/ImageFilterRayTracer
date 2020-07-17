@@ -1,6 +1,7 @@
 package com.raytracer.math.mesh;
 
 import com.raytracer.math.ray.Ray;
+import com.raytracer.math.ray.RayTriangleQuery;
 import com.raytracer.math.vector.Vector3;
 
 public class Triangle {
@@ -36,14 +37,16 @@ public class Triangle {
 		this.C = C;
 	}
 
-	public boolean intersects(Ray ray) { // Moller-Trumbore algorithm
+	public RayTriangleQuery queryIntersection(Ray ray) { // Moller-Trumbore algorithm
+		RayTriangleQuery query = new RayTriangleQuery(ray, this);
+
 		Vector3 edgeAB = this.B.getPosition().substract(this.A.getPosition());
 		Vector3 edgeAC = this.C.getPosition().substract(this.A.getPosition());
 
 		float viewVolume = edgeAB.dot(ray.getDirection().cross(edgeAC));
 
 		if (Math.abs(viewVolume) < 0.0001) {
-			return false;
+			return query; // no intersection
 		}
 
 		float divisor = 1 / viewVolume;
@@ -52,7 +55,7 @@ public class Triangle {
 		float u = vertexAToOrigin.dot(ray.getDirection().cross(edgeAC)) * divisor;
 
 		if (u < 0 || u > 1) {
-			return false;
+			return query; // no intersection
 		}
 
 		Vector3 someRandomVector = vertexAToOrigin.cross(edgeAB);
@@ -60,15 +63,20 @@ public class Triangle {
 		float v = ray.getDirection().dot(someRandomVector) * divisor;
 
 		if (v < 0 || u + v > 1) {
-			return false;
+			return query; // no intersection
 		}
 
 		float t = edgeAC.dot(someRandomVector) * divisor;
 
 		if (t > 0.0001) {
-			return true;
+			query.setIntersection(true);
+			query.setDepth(t);
+			query.setU(u);
+			query.setV(v);
+
+			return query;
 		}
 
-		return false;
-	} // will need method of perserving u and v parameters for vertex/triangle interpolation
+		return query; // no intersection
+	}
 }
