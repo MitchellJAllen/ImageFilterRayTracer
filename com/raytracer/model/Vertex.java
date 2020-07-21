@@ -1,4 +1,4 @@
-package com.raytracer.math.mesh;
+package com.raytracer.model;
 
 import java.util.HashMap;
 

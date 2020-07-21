@@ -1,7 +1,7 @@
 package com.raytracer.filter.raytrace.surface;
 
 import com.raytracer.filter.raytrace.material.Material;
-import com.raytracer.math.mesh.Mesh;
+import com.raytracer.model.Mesh;
 
 public class Surface {
 	private Mesh mesh;

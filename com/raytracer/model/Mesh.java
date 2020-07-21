@@ -1,4 +1,4 @@
-package com.raytracer.math.mesh;
+package com.raytracer.model;
 
 import com.raytracer.math.ray.Ray;
 import com.raytracer.math.ray.RayTriangleQuery;
@@ -31,6 +31,16 @@ public class Mesh {
 
 	public void addTriangle(Triangle triangle) {
 		this.triangles.add(triangle);
+	}
+
+	public int getTriangleCount() {
+		return this.triangles.size();
+	}
+
+	public Triangle getTriangleByIndex(int index) {
+		Triangle source = this.triangles.get(index);
+
+		return new Triangle(source.getA(), source.getB(), source.getC());
 	}
 
 	public RayTriangleQuery queryIntersection(Ray ray) { // ideally, more efficient algorithm

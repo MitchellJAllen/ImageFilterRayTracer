@@ -1,6 +1,6 @@
 package com.raytracer.math.ray;
 
-import com.raytracer.math.mesh.Triangle;
+import com.raytracer.model.Triangle;
 import com.raytracer.math.vector.Vector3;
 
 public class RayTriangleQuery {
