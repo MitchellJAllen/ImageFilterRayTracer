@@ -17,7 +17,6 @@ public class NoiseFilter extends ColorFilter {
 		this.intensity = intensity;
 	}
 
-
 	private float addNoise(float componentValue) {
 		return this.intensity * (float)Math.random() + (1 - intensity) * componentValue;
 	}
