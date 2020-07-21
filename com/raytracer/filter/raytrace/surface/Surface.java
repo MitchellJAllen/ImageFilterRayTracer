@@ -1,19 +1,19 @@
 package com.raytracer.filter.raytrace.surface;
 
 import com.raytracer.filter.raytrace.material.Material;
-import com.raytracer.model.Mesh;
+import com.raytracer.model.Model;
 
 public class Surface {
-	private Mesh mesh;
+	private Model model;
 	private Material material;
 
-	public Surface(Mesh mesh, Material material) {
-		this.mesh = mesh;
+	public Surface(Model model, Material material) {
+		this.model = model;
 		this.material = material;
 	}
 
-	public Mesh getMesh() {
-		return this.mesh;
+	public Model getModel() {
+		return this.model;
 	}
 
 	public Material getMaterial() {

@@ -6,14 +6,14 @@ import com.raytracer.math.ray.RayTriangleQuery;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class Mesh {
+public class Model {
 	private ArrayList<Triangle> triangles; // may need more spatially-aware storage option
 
-	public Mesh() {
+	public Model() {
 		this.triangles = new ArrayList<>();
 	}
 
-	public Mesh(Triangle... triangles) {
+	public Model(Triangle... triangles) {
 		this.triangles = new ArrayList<>(triangles.length);
 
 		for (Triangle triangle : triangles) {
@@ -21,7 +21,7 @@ public class Mesh {
 		}
 	}
 
-	public Mesh(Collection<Triangle> triangles) {
+	public Model(Collection<Triangle> triangles) {
 		this.triangles = new ArrayList<>(triangles.size());
 
 		for (Triangle triangle : triangles) {

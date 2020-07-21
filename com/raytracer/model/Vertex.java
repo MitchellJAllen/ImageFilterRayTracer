@@ -5,6 +5,8 @@ import java.util.HashMap;
 import com.raytracer.math.vector.Vector3;
 
 public class Vertex {
+	private static final String POSITION_NAME = "position";
+
 	private HashMap<String, String> propertyType;
 	private HashMap<String, Object> propertyData;
 
@@ -16,11 +18,11 @@ public class Vertex {
 	}
 
 	public Vector3 getPosition() {
-		return this.getProperty("position", Vector3.class);
+		return this.getProperty(POSITION_NAME, Vector3.class);
 	}
 
 	public void setPosition(Vector3 position) {
-		this.setProperty("position", position);
+		this.setProperty(POSITION_NAME, position);
 	}
 
 	private <DataType> String calculateTypeName(Class<DataType> propertyType) {
@@ -61,7 +63,11 @@ public class Vertex {
 		}
 	}
 
-	public void deleteProperty(String propertyName) { // possible exception for "position"?
+	public void deleteProperty(String propertyName) {
+		if (POSITION_NAME.equals(propertyName)) {
+			return; // not allowed to delete position property
+		}
+
 		this.propertyType.remove(propertyName);
 		this.propertyData.remove(propertyName);
 	}

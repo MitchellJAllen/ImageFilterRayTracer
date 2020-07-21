@@ -2,7 +2,7 @@ package com.raytracer.filter.raytrace.environment;
 
 import com.raytracer.filter.raytrace.material.VertexColorMaterial;
 import com.raytracer.filter.raytrace.surface.Surface;
-import com.raytracer.model.Mesh;
+import com.raytracer.model.Model;
 import com.raytracer.model.Triangle;
 import com.raytracer.model.Vertex;
 import com.raytracer.transformation.TranslateTransformation;
@@ -24,16 +24,16 @@ public class TriangleEnvironment implements Environment {
 		c.setProperty("color", new Vector4(0, 0, 1, 1));
 
 		this.surface = new Surface(
-			new Mesh(new Triangle(a, b, c)),
+			new Model(new Triangle(a, b, c)),
 			new VertexColorMaterial()
 		);
 
 		// test of basic transformation
-		new TranslateTransformation(new Vector3(0, 0, -2)).processModel(this.surface.getMesh());
+		new TranslateTransformation(new Vector3(0, 0, -2)).processModel(this.surface.getModel());
 	}
 
 	public Vector4 getColor(Ray ray) {
-		RayTriangleQuery query = this.surface.getMesh().queryIntersection(ray);
+		RayTriangleQuery query = this.surface.getModel().queryIntersection(ray);
 
 		if (query != null) {
 			return this.surface.getMaterial().getColor(query);
