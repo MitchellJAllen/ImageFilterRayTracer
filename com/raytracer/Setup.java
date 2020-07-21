@@ -6,7 +6,7 @@ import com.raytracer.filter.color.ReplaceColorFilter;
 import com.raytracer.filter.file.SaveFilter;
 import com.raytracer.filter.raytrace.RayTracingFilter;
 import com.raytracer.filter.raytrace.camera.SimplePerspectiveCamera;
-import com.raytracer.filter.raytrace.environment.TriangleEnvironment;
+import com.raytracer.filter.raytrace.environment.TestEnvironment;
 import com.raytracer.image.Image;
 import com.raytracer.math.vector.Vector4;
 
@@ -24,7 +24,7 @@ public class Setup {
 		Image test = new Image(800, 600);
 
 		SimplePerspectiveCamera testCamera = new SimplePerspectiveCamera(1.333f, 70);
-		TriangleEnvironment testEnvironment = new TriangleEnvironment();
+		TestEnvironment testEnvironment = new TestEnvironment();
 		RayTracingFilter testFilter = new RayTracingFilter(testCamera, testEnvironment);
 
 		List<Filter> filters = new ArrayList<>();

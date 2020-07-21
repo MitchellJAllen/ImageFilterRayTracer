@@ -9,10 +9,10 @@ import com.raytracer.math.ray.Ray;
 import com.raytracer.math.vector.Vector3;
 import com.raytracer.math.vector.Vector4;
 
-public class TriangleEnvironment implements Environment {
+public class TestEnvironment implements Environment {
 	private Surface surface;
 
-	public TriangleEnvironment() {
+	public TestEnvironment() {
 		this.surface = new Surface(
 			new WavefrontModelLoader().loadModel("roundedCube.obj"),
 			new NormalColorMaterial()
