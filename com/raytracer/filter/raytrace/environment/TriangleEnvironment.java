@@ -1,10 +1,8 @@
 package com.raytracer.filter.raytrace.environment;
 
-import com.raytracer.filter.raytrace.material.VertexColorMaterial;
+import com.raytracer.filter.raytrace.material.NormalColorMaterial;
 import com.raytracer.filter.raytrace.surface.Surface;
-import com.raytracer.model.Model;
-import com.raytracer.model.Triangle;
-import com.raytracer.model.Vertex;
+import com.raytracer.model.loader.WavefrontModelLoader;
 import com.raytracer.transformation.TranslateTransformation;
 import com.raytracer.math.ray.RayTriangleQuery;
 import com.raytracer.math.ray.Ray;
@@ -15,17 +13,9 @@ public class TriangleEnvironment implements Environment {
 	private Surface surface;
 
 	public TriangleEnvironment() {
-		Vertex a = new Vertex(new Vector3(0, 1, 0));
-		Vertex b = new Vertex(new Vector3(-1, -1, 0));
-		Vertex c = new Vertex(new Vector3(1, -1, 0));
-
-		a.setProperty("color", new Vector4(1, 0, 0, 1)); // used in material
-		b.setProperty("color", new Vector4(0, 1, 0, 1));
-		c.setProperty("color", new Vector4(0, 0, 1, 1));
-
 		this.surface = new Surface(
-			new Model(new Triangle(a, b, c)),
-			new VertexColorMaterial()
+			new WavefrontModelLoader().loadModel("roundedCube.obj"),
+			new NormalColorMaterial()
 		);
 
 		// test of basic transformation

@@ -23,7 +23,7 @@ public class Setup {
 	public static void main(String[] args) {
 		Image test = new Image(800, 600);
 
-		SimplePerspectiveCamera testCamera = new SimplePerspectiveCamera(1.333f, 120);
+		SimplePerspectiveCamera testCamera = new SimplePerspectiveCamera(1.333f, 70);
 		TriangleEnvironment testEnvironment = new TriangleEnvironment();
 		RayTracingFilter testFilter = new RayTracingFilter(testCamera, testEnvironment);
 
