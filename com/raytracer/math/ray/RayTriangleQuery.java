@@ -1,11 +1,11 @@
 package com.raytracer.math.ray;
 
 import com.raytracer.math.mesh.Triangle;
+import com.raytracer.math.vector.Vector3;
 
 public class RayTriangleQuery {
 	private Ray ray;
 	private Triangle triangle;
-	private boolean intersection;
 	private float depth, u, v;
 
 	public RayTriangleQuery(Ray ray, Triangle triangle) {
@@ -19,14 +19,6 @@ public class RayTriangleQuery {
 
 	public Triangle getTriangle() {
 		return this.triangle;
-	}
-
-	public boolean isIntersection() {
-		return this.intersection;
-	}
-
-	public void setIntersection(boolean intersection) {
-		this.intersection = intersection;
 	}
 
 	public float getDepth() {
@@ -55,5 +47,9 @@ public class RayTriangleQuery {
 
 	public float getW() {
 		return 1 - this.u - this.v;
+	}
+
+	public Vector3 getPosition() {
+		return this.ray.getOrigin().add(this.ray.getDirection().scale(this.depth));
 	}
 }

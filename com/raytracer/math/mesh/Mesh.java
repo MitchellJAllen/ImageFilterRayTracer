@@ -40,7 +40,7 @@ public class Mesh {
 			RayTriangleQuery query = triangle.queryIntersection(ray);
 
 			if (
-				query.isIntersection() && (
+				query != null && (
 					closestTriangleIntersection == null ||
 					closestTriangleIntersection.getDepth() > query.getDepth()
 				)
