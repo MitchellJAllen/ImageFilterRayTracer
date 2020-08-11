@@ -76,11 +76,11 @@ public class WavefrontModelLoader implements ModelLoader {
 		Vertex result = new Vertex(positions.get(Integer.parseInt(tokens[0]) - 1));
 
 		if (tokens.length > 1 && tokens[1].length() > 0) {
-			result.setProperty("texcoord", textureCoordinates.get(Integer.parseInt(tokens[1]) - 1));
+			result.setTextureCoordinates(0, textureCoordinates.get(Integer.parseInt(tokens[1]) - 1));
 		}
 
 		if (tokens.length > 2 && tokens[2].length() > 0) {
-			result.setProperty("normal", normals.get(Integer.parseInt(tokens[2]) - 1));
+			result.setNormal(normals.get(Integer.parseInt(tokens[2]) - 1));
 		}
 
 		return result;

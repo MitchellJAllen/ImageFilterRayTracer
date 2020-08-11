@@ -2,73 +2,40 @@ package com.raytracer.model;
 
 import java.util.HashMap;
 
+import com.raytracer.math.vector.Vector2;
 import com.raytracer.math.vector.Vector3;
 
 public class Vertex {
-	private static final String POSITION_NAME = "position";
-
-	private HashMap<String, String> propertyType;
-	private HashMap<String, Object> propertyData;
+	private Vector3 position;
+	private Vector3 normal;
+	private HashMap<Integer, Vector2> textureCoordinates;
 
 	public Vertex(Vector3 position) {
-		this.propertyType = new HashMap<>();
-		this.propertyData = new HashMap<>();
-
-		this.setPosition(position);
+		this.position = position;
+		this.textureCoordinates = new HashMap<>();
 	}
 
 	public Vector3 getPosition() {
-		return this.getProperty(POSITION_NAME, Vector3.class);
+		return this.position;
 	}
 
 	public void setPosition(Vector3 position) {
-		this.setProperty(POSITION_NAME, position);
+		this.position = position;
 	}
 
-	private <DataType> String calculateTypeName(Class<DataType> propertyType) {
-		if (propertyType == null || propertyType.getCanonicalName() == null) {
-			return Object.class.getCanonicalName();
-		}
-
-		return propertyType.getCanonicalName();
+	public Vector3 getNormal() {
+		return this.normal;
 	}
 
-	public <DataType> DataType getProperty(String propertyName, Class<DataType> propertyType) {
-		String inputTypeName = this.calculateTypeName(propertyType);
-		String storedTypeName = this.propertyType.get(propertyName);
-
-		if (inputTypeName.equals(storedTypeName)) {
-			return (DataType)this.propertyData.get(propertyName);
-		}
-
-		return null;
+	public void setNormal(Vector3 normal) {
+		this.normal = normal;
 	}
 
-	public void setProperty(String propertyName, Object propertyValue) {
-		String inputTypeName = Object.class.getCanonicalName();
-
-		if (propertyValue != null) {
-			inputTypeName = this.calculateTypeName(propertyValue.getClass());
-		}
-
-		String storedTypeName = this.propertyType.get(propertyName);
-
-		if (storedTypeName == null) {
-			storedTypeName = inputTypeName;
-			this.propertyType.put(propertyName, storedTypeName);
-		}
-
-		if (inputTypeName.equals(storedTypeName)) {
-			this.propertyData.put(propertyName, propertyValue);
-		}
+	public Vector2 getTextureCoordinates(int layerIndex) {
+		return this.textureCoordinates.get(layerIndex);
 	}
 
-	public void deleteProperty(String propertyName) {
-		if (POSITION_NAME.equals(propertyName)) {
-			return; // not allowed to delete position property
-		}
-
-		this.propertyType.remove(propertyName);
-		this.propertyData.remove(propertyName);
+	public void setTextureCoordinates(int layerIndex, Vector2 textureCoordinates) {
+		this.textureCoordinates.put(layerIndex, textureCoordinates);
 	}
 }
