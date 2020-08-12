@@ -5,8 +5,6 @@ import com.raytracer.image.Image;
 import com.raytracer.math.vector.Vector4;
 
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
 
 public class SaveFilter implements Filter {
 	private static final int headerSize = 18;
@@ -65,12 +63,12 @@ public class SaveFilter implements Filter {
 		}
 
 		try (
-			OutputStream outputFile = new FileOutputStream(this.fileName);
+			FileOutputStream outputFile = new FileOutputStream(this.fileName);
 		) {
 			outputFile.write(tgaData);
 		}
-		catch (IOException ex) {
-			ex.printStackTrace();
+		catch (Exception exception) {
+			exception.printStackTrace();
 		}
 	}
 }

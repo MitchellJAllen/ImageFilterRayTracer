@@ -1,6 +1,7 @@
 package com.raytracer;
 
 import com.raytracer.filter.Filter;
+import com.raytracer.filter.color.BlendColorFilter;
 import com.raytracer.filter.color.NoiseFilter;
 import com.raytracer.filter.color.ReplaceColorFilter;
 import com.raytracer.filter.file.SaveFilter;
@@ -8,6 +9,7 @@ import com.raytracer.filter.raytrace.RayTracingFilter;
 import com.raytracer.filter.raytrace.camera.SimplePerspectiveCamera;
 import com.raytracer.filter.raytrace.environment.TestEnvironment;
 import com.raytracer.image.Image;
+import com.raytracer.image.loader.TargaImageLoader;
 import com.raytracer.math.vector.Vector4;
 
 import java.util.ArrayList;
@@ -35,6 +37,11 @@ public class Setup {
 		filters.add(new SaveFilter("out2.tga"));
 
 		runFilters(filters, test);
+
+		Image redTest = new TargaImageLoader().loadImage("red.tga");
+
+		new BlendColorFilter(new Vector4(0, 0, 1, 1), 0.5f).processImage(redTest);
+		new SaveFilter("out3.tga").processImage(redTest);
 
 		System.out.println(test.getPixel(500, 300));
 	}

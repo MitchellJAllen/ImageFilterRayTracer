@@ -86,7 +86,7 @@ public class WavefrontModelLoader implements ModelLoader {
 		return result;
 	}
 
-	public Model loadModel(String fileName) {
+	public Model loadModel(String filePath) {
 		Model result = new Model();
 
 		ArrayList<Vector3> positions = new ArrayList<>();
@@ -94,7 +94,7 @@ public class WavefrontModelLoader implements ModelLoader {
 		ArrayList<Vector3> normals = new ArrayList<>();
 
 		try {
-			File wavefrontFile = new File(fileName);
+			File wavefrontFile = new File(filePath);
 			Scanner fileScanner = new Scanner(wavefrontFile);
 
 			while (fileScanner.hasNextLine()) {
