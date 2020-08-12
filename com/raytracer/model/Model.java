@@ -50,9 +50,10 @@ public class Model {
 			RayTriangleQuery query = triangle.queryIntersection(ray);
 
 			if (
-				query != null && (
+				query != null &&
+				query.getDepth() > 0 && (
 					closestTriangleIntersection == null ||
-					closestTriangleIntersection.getDepth() > query.getDepth()
+					query.getDepth() < closestTriangleIntersection.getDepth()
 				)
 			) {
 				closestTriangleIntersection = query;
