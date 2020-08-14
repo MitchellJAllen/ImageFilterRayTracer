@@ -41,4 +41,8 @@ public class SimplePerspectiveCamera implements Camera {
 
 		return new Ray(cameraFocalPoint, planePixelPosition.substract(cameraFocalPoint));
 	}
+
+	public Vector3 getDirection(Vector3 position) {
+		return position.scale(-1).normalize();
+	}
 }

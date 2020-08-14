@@ -8,9 +8,17 @@ import com.raytracer.filter.file.SaveFilter;
 import com.raytracer.filter.raytrace.RayTracingFilter;
 import com.raytracer.filter.raytrace.camera.SimplePerspectiveCamera;
 import com.raytracer.filter.raytrace.environment.TestEnvironment;
+import com.raytracer.filter.raytrace.light.DirectionalLight;
+import com.raytracer.filter.raytrace.light.Light;
+import com.raytracer.filter.raytrace.material.BlinnPhongMaterial;
+import com.raytracer.filter.raytrace.surface.Surface;
 import com.raytracer.image.Image;
 import com.raytracer.image.loader.TargaImageLoader;
+import com.raytracer.math.vector.Vector3;
 import com.raytracer.math.vector.Vector4;
+import com.raytracer.model.Model;
+import com.raytracer.model.loader.WavefrontModelLoader;
+import com.raytracer.transformation.TranslateTransformation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +34,19 @@ public class Setup {
 		Image test = new Image(800, 600);
 
 		SimplePerspectiveCamera testCamera = new SimplePerspectiveCamera(1.333f, 70);
-		TestEnvironment testEnvironment = new TestEnvironment();
+		DirectionalLight testLight = new DirectionalLight(new Vector3(1, 1, 1), new Vector3(1, 1, 0).normalize());
+		DirectionalLight testLight2 = new DirectionalLight(new Vector3(1, 1, 1), new Vector3(-1, 1, 0).normalize());
+
+		Light[] testLights = {testLight, testLight2};
+
+		Model testModel = new WavefrontModelLoader().loadModel("roundedCube.obj");
+		BlinnPhongMaterial testMaterial = new BlinnPhongMaterial(testCamera, testLights, new Vector3(1, 0.75f, 0.5f));
+		Surface testSurface = new Surface(testModel, testMaterial);
+
+		// test of basic transformation
+		new TranslateTransformation(new Vector3(0, 0, -2)).processModel(testModel);
+
+		TestEnvironment testEnvironment = new TestEnvironment(testSurface);
 		RayTracingFilter testFilter = new RayTracingFilter(testCamera, testEnvironment);
 
 		List<Filter> filters = new ArrayList<>();

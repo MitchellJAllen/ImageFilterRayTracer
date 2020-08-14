@@ -34,6 +34,10 @@ public class OrthogonalCamera implements Camera {
 		return this.direction;
 	}
 
+	public Vector3 getDirection(Vector3 position) {
+		return this.direction.scale(-1);
+	}
+
 	public void setDirection(Vector3 direction) {
 		this.direction = direction;
 	}

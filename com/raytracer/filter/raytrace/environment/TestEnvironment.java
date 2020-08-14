@@ -1,25 +1,23 @@
 package com.raytracer.filter.raytrace.environment;
 
-import com.raytracer.filter.raytrace.material.NormalColorMaterial;
 import com.raytracer.filter.raytrace.surface.Surface;
-import com.raytracer.model.loader.WavefrontModelLoader;
-import com.raytracer.transformation.TranslateTransformation;
 import com.raytracer.math.ray.RayTriangleQuery;
 import com.raytracer.math.ray.Ray;
-import com.raytracer.math.vector.Vector3;
 import com.raytracer.math.vector.Vector4;
 
 public class TestEnvironment implements Environment {
 	private Surface surface;
 
-	public TestEnvironment() {
-		this.surface = new Surface(
-			new WavefrontModelLoader().loadModel("roundedCube.obj"),
-			new NormalColorMaterial()
-		);
+	public TestEnvironment(Surface surface) {
+		this.surface = surface;
+	}
 
-		// test of basic transformation
-		new TranslateTransformation(new Vector3(0, 0, -2)).processModel(this.surface.getModel());
+	public Surface getSurface() {
+		return this.surface;
+	}
+
+	public void setSurface(Surface surface) {
+		this.surface = surface;
 	}
 
 	public Vector4 getColor(Ray ray) {
@@ -29,7 +27,7 @@ public class TestEnvironment implements Environment {
 			return this.surface.getMaterial().getColor(query);
 		}
 		else {
-			return new Vector4(0, 0, 0, 0); // transparent
+			return new Vector4(); // transparent
 		}
 	}
 }

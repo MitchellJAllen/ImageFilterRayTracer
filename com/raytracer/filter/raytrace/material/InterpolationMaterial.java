@@ -4,11 +4,8 @@ import com.raytracer.math.ray.RayTriangleQuery;
 
 import com.raytracer.math.vector.Vector2;
 import com.raytracer.math.vector.Vector3;
-import com.raytracer.math.vector.Vector4;
 
 public abstract class InterpolationMaterial implements Material {
-	public abstract Vector4 getColor(RayTriangleQuery query);
-
 	public Vector3 getInterpolatedNormal(RayTriangleQuery query) {
 		Vector3 contributionA = query.getTriangle().getA().getNormal().scale(query.getW());
 		Vector3 contributionB = query.getTriangle().getB().getNormal().scale(query.getU());
